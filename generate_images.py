@@ -127,9 +127,17 @@ async def main() -> None:
             session,
             exclude_repos=excluded_repos,
             exclude_langs=excluded_langs,
-            ignore_forked_repos=ignore_forked_repos,
+            ignore_forked_repos=True,
         )
-        await asyncio.gather(generate_languages(s), generate_overview(s))
+        sL = Stats(
+            user,
+            access_token,
+            session,
+            exclude_repos=excluded_repos,
+            exclude_langs=excluded_langs,
+            ignore_forked_repos=False,
+        )
+        await asyncio.gather(generate_languages(sL), generate_overview(s))
 
 
 if __name__ == "__main__":
